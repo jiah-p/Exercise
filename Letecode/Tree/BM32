@@ -1,0 +1,44 @@
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param t1 TreeNode类 
+# @param t2 TreeNode类 
+# @return TreeNode类
+#
+class Solution:
+
+    def preOrder(self, r1, r2):
+        # 首先两个都为空那么返回 递归推出条件
+        if (not r1) and (not r2):
+            return
+        # r2 为空返回
+        if not r2:
+            return
+        # 如果r2有左右子树，但是r1没有，那么提前创建
+        if not r1.right and r2.right:
+            r1.right = TreeNode(0)
+        if not r1.left and r2.left:
+            r1.left = TreeNode(0)
+        # 因为前面保证了对应位置r1都有子树，所以直接相加
+        if r1 and r2:
+            r1.val += r2.val 
+
+
+        self.preOrder(r1.left, r2.left)
+        self.preOrder(r1.right, r2.right)
+
+        return
+
+        # 处理节点
+    def mergeTrees(self , t1: TreeNode, t2: TreeNode) -> TreeNode:
+        # write code here
+
+        self.preOrder(t1, t2)
+
+        return t1

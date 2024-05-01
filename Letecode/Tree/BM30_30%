@@ -1,0 +1,90 @@
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+#
+# 
+# @param pRootOfTree TreeNode类 
+# @return TreeNode类
+#
+class Solution:
+    mid = []
+    head = None
+    flag = True
+    pre = TreeNode(None)
+    def midOrder(self, root):
+        if not root:
+            return 
+        self.midOrder(root.left)
+
+        # 处理每个节点
+        # 找到头节点
+        if self.flag:
+            self.flag = False
+            self.head = root
+            # 初始化pre
+            self.pre = root
+        else:
+            # 遍历到第二个节点
+            self.pre.right = root
+            root.left = self.pre
+            self.pre = root
+            
+        self.midOrder(root.right)
+
+        return
+
+
+    def Convert(self , pRootOfTree ):
+        # write code here
+        self.midOrder(pRootOfTree)
+
+        return self.head
+
+
+
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+#
+# 
+# @param pRootOfTree TreeNode类 
+# @return TreeNode类
+#
+class Solution:
+    mid = []
+    head = None
+    flag = True
+    pre = TreeNode(None)
+    def midOrder(self, root):
+        if not root:
+            return 
+        self.midOrder(root.left)
+        # 处理每个节点
+        # 找到头节点
+        if self.flag:
+            self.flag = False
+            self.head = root
+            # 初始化pre
+            self.pre = root
+        else:
+            # 遍历到第二个节点
+            self.pre.right = root
+            root.left = self.pre
+            self.pre = root
+        self.midOrder(root.right)
+
+        return
+
+
+    def Convert(self , pRootOfTree ):
+        # write code here
+        self.midOrder(pRootOfTree)
+
+        return self.head
+
