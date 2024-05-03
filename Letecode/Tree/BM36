@@ -1,0 +1,28 @@
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param pRoot TreeNode类 
+# @return bool布尔型
+#
+class Solution:
+    ans = True
+    def depth(self, root):
+        if not root:
+            return 0
+        ldep = self.depth(root.left)
+        rdep = self.depth(root.right)
+        if abs(ldep - rdep) > 1:
+            self.ans = False
+        return max(ldep,rdep)+1
+
+    def IsBalanced_Solution(self , pRoot: TreeNode) -> bool:
+        # write code here
+        self.depth(pRoot) 
+        return self.ans
+

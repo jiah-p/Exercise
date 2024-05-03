@@ -1,0 +1,31 @@
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param root TreeNode类 
+# @return bool布尔型
+#
+class Solution:
+    def isCompleteTree(self , root: TreeNode) -> bool:
+        # write code here
+        q = [root]
+        # 层次遍历找到一个为空的点
+        while q:
+            temp = q.pop(0)
+            if not temp:
+                break
+            q.append(temp.left)
+            q.append(temp.right)
+        # 如果为空的点后面还有点 那么不符合完全二叉树条件
+        while q:
+            if q.pop(0):
+                return False
+        return True
+        
+ 
+

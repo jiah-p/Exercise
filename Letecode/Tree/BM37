@@ -1,0 +1,36 @@
+from enum import Flag
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param root TreeNode类 
+# @param p int整型 
+# @param q int整型 
+# @return int整型
+#
+class Solution:
+    ans = -1
+    flag = True
+    def findPa(self,root,p,q):
+        if not root:
+            return 
+        if ((p >= root.val and q <= root.val) or (q >= root.val and p <= root.val)) and self.flag:
+            self.flag = False
+            self.ans = root.val
+        if p<= root.val and q <= root.val:
+            self.findPa(root.left,p,q)
+        if p>= root.val and q >= root.val:
+            self.findPa(root.right,p,q)
+
+        return
+    def lowestCommonAncestor(self , root: TreeNode, p: int, q: int) -> int:
+        # write code here
+        self.findPa(root,p,q)
+
+        return self.ans
+
