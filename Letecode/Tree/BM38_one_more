@@ -1,0 +1,94 @@
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param root TreeNode类 
+# @param o1 int整型 
+# @param o2 int整型 
+# @return int整型
+#
+class Solution:
+    find = False
+    def dfs(self,root,path,o1):
+        if not root or self.find:
+            return
+        if o1 == root.val:
+            self.find = True
+        path.append(root.val)
+        self.dfs(root.left,path,o1)
+        self.dfs(root.right,path,o1)
+        if self.find:
+            return 
+        path.pop()
+
+    def lowestCommonAncestor(self , root: TreeNode, o1: int, o2: int) -> int:
+        # write code here
+        # q = [root]
+        # l_son = []
+        # l_pa = []
+        # while ((not o1 in l_son) or (not o2 in l_son)) and q:
+        #     temp = q.pop(0)
+        #     if temp.left:
+        #         l_son.append(temp.left.val)
+        #         l_pa.append(temp.val)
+        #         q.append(temp.left)
+        #     if temp.right:
+        #         l_son.append(temp.right.val)
+        #         l_pa.append(temp.val)
+        #         q.append(temp.right)
+        # print(l_son,l_pa)
+        # # 构造了一个位置对应的父子列表
+        # a = set()
+        # a.add(o1)
+        # if o1 != root.val:
+        #     son = l_son.index(o1)
+        #     while l_pa[son] != root.val:
+        #         a.add(l_pa[son])
+        #         son = l_son.index(l_pa[son])
+        #     a.add(root.val)
+        # # print(a,l_son,l_pa)
+        # while o2 not in a:
+        #     o2 = l_pa[l_son.index(o2)]
+
+        # return o2
+        # 这个时间复杂度太大了
+        p1 = []
+        p2 = []
+        self.dfs(root,p2,o2)
+        self.find = False
+        self.dfs(root,p1,o1)
+        # print(p1,p2)
+        length = min(len(p1),len(p2))
+        ind = 0
+        for i in range(length,0,-1):
+            if p1[i-1] == p2[i-1]:
+                ind = i-1
+                break
+        return p1[ind]
+
+# 这个怎么理解
+# class Solution:
+#     def lowestCommonAncestor(self , root , o1 , o2 ):
+#         # write code here
+#         def dfs(root, o1, o2):
+#             if not root:
+#                 return None
+#             if root.val ==o1 or root.val==o2:
+#                 return root
+#             left = dfs(root.left, o1, o2)
+#             right = dfs(root.right, o1, o2)
+#             if not left:
+#                 return right
+#             if not right:
+#                 return left
+#             return root
+#         return dfs(root, o1, o2).val
+
+
+
+
