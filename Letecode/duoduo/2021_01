@@ -1,0 +1,32 @@
+import sys
+
+N = input()
+l = len(N)
+N = int(N)
+
+if l < 1:
+    print(-1) 
+    
+elif l == 1:
+    print(N)
+    
+elif N > 45:
+    print(-1)
+    
+else:
+    ans = []
+    for i in range(9,0,-1):
+        N -= i
+        if  N > 0:
+            ans.append(i)
+        else:
+            N += i
+            break
+    ans.append(N)
+    res = ''
+    for i in range(len(ans)-1,-1,-1):
+        res += str(ans[i])
+    print(int(res))
+
+
+

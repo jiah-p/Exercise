@@ -1,0 +1,57 @@
+from re import T
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param nums int整型一维数组 
+# @param target int整型 
+# @return int整型
+#
+class Solution:
+    # def found(self,nums,target,low,high):
+    #     if low > high:
+    #         return False
+    #     mid = (low + high) // 2
+    #     if nums[mid] == target:
+    #         return mid
+    #     if nums[mid] > target:
+    #         return self.found(nums, target,low, mid-1)
+    #     else:
+    #         return self.found(nums, target, mid+1, high)
+
+    # def search(self , nums: List[int], target: int) -> int:
+    #     # write code here
+    #     # ans = self.found(nums,target,0,len(nums)-1)
+    #     # if ans is False:
+    #     #     return -1
+    #     low = 0
+    #     high = len(nums) -1
+    #     while low <= high:
+    #         mid = (high + low) //2
+    #         if nums[mid] == target:
+    #             return mid
+    #         if nums[mid] > target:
+    #             high = mid - 1
+    #         else:
+    #             low = mid + 1
+ 
+    #     return -1 
+    def search(self , nums: List[int], target: int) -> int:
+        length = len(nums)
+        l=0
+        r=length-1
+        if length ==0:
+            return -1
+        while l<r :
+            mid = int((l+r+1)/2)
+            if nums[mid]<= target:
+                l = mid
+            else:
+                r = mid-1
+ 
+        if nums[r] == target:
+            return r
+        else:
+            return -1
+
+
