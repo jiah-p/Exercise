@@ -1,0 +1,3 @@
+
+visit = [False] * (N+1)
+

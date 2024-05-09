@@ -1,0 +1,7 @@
+def depth(root):
+    if not root:
+        return 0
+    leftd = depth(root.left) + 1
+    rightd = depth(root.right) + 1
+
+    return max(leftd, rightd)

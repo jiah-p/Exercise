@@ -1,0 +1,16 @@
+def floor(n):
+    # if n <= 0:
+    #     if n ==0:
+    #         a[0] +=1
+    #     return
+    # floor(n-1,a)
+    # floor(n-2,a)
+    # return 
+    if n == 1:return 1
+    if n == 2:return 2
+    return floor(n-1) + floor(n-2)
+
+
+ans = floor(5)
+
+print(ans)

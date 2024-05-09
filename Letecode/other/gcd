@@ -1,0 +1,9 @@
+def gcd(a,b):
+    if a%b == 0:
+        return b
+    ans = gcd(b,a%b)
+    return ans
+
+
+ans = gcd(8,4)
+print(ans)

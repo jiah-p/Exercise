@@ -1,0 +1,21 @@
+
+ans = []
+N = 3
+visited = [False] * (N+1)    # 标记数组在很多情况都有用，记得就行需要的时候定义一个然后注意数组的大小就是要不要+1
+
+# n 定义为数组长度
+def fullrange(n, N):
+    if n >= N:
+        print(ans)
+        return 
+    # 用for循环来进行遍历
+    for i in range(1,N+1):
+        if  visited[i]: continue
+        # 这块的构思注意下就行，首先压进来，然后标记，然后遍历下一个如果满足了条件就输出
+        ans.append(i)
+        visited[i] = True
+        fullrange(n+1,N)
+        ans.pop()
+        visited[i] = False
+        
+fullrange(0,N)

@@ -1,0 +1,35 @@
+import sys
+def mergesort(a,low,high):
+    if low >= high:return 
+    mid = (low + high) // 2
+   
+    mergesort(a,low,mid)
+    mergesort(a,mid+1,high)
+    merge(a,low,mid,high)
+
+def merge(a,low,mid,high):
+    temp = []
+    m = mid+1
+    l = low
+    while low <= mid and m <= high:
+        if a[low] < a[m]:
+            temp.append(a[low])
+            low +=1
+        else:
+            temp.append(a[m])
+            m += 1
+    while low <= mid:
+        temp.append(a[low])
+        low += 1
+    while m <= high:
+        temp.append(a[m])
+        m += 1
+
+    for i in range(len(temp)):
+        a[l+i] = temp[i]
+
+test =  [1,2,3,7,5,4,8,9,3]
+
+mergesort(test,0,len(test)-1)
+
+print(test)

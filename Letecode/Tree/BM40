@@ -16,10 +16,10 @@ class Solution:
         if not preorder or not inorder:
             return None
         root = TreeNode(preorder[0])
-        in_root = inorder.index(root.val) #3
 
-        root.left = self.buildTree(preorder[1:in_root+1], inorder[:in_root])
-        root.right = self.buildTree(preorder[in_root+1:], inorder[in_root+1:])
+        index_root = inorder.index(root.val) #3
+        root.left = self.buildTree(preorder[1:index_root+1], inorder[:index_root])
+        root.right = self.buildTree(preorder[index_root+1:], inorder[index_root+1:])
 
         return root
 

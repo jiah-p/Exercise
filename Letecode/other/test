@@ -1,0 +1,22 @@
+def maxLength(arr) -> int:
+        # write code here
+        ans = []
+        m = 0
+        i = 0
+        while i < len(arr):
+            if arr[i] not in ans:
+                ans.append(arr[i])
+            else:
+                if m < len(ans):
+                    rec = ans.copy()
+                ans = []
+                ans.append(arr[i])
+            i+= 1
+            if i == len(arr):
+                if m < len(ans):
+                    rec = ans.copy()
+        
+        return rec
+
+res = maxLength([1,2,3,3,4,5,6,8])
+print(res)
