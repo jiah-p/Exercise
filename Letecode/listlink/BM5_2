@@ -1,0 +1,46 @@
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param lists ListNode类一维数组 
+# @return ListNode类
+#
+class Solution:
+    def mergeKLists(self , lists: List[ListNode]) -> ListNode:
+        # write code here
+
+        def mergesort(lists, left ,right):
+            if left > right:
+                return None
+            if left == right:
+                return lists[left]
+
+            mid = (left + right) // 2
+            return merge(mergesort(lists, left ,mid),mergesort(lists, mid+1 ,right))
+
+        def merge(p1,p2):
+            head = ListNode(0)
+            cur = head
+
+            while p1 and p2:
+                if p1.val < p2.val:
+                    cur.next = p1
+                    p1 = p1.next
+                else:
+                    cur.next = p2
+                    p2 = p2.next
+                cur = cur.next
+            if p1:
+                cur.next = p1
+            else:
+                cur.next = p2
+
+            return head.next
+        return mergesort(lists,0,len(lists)-1)
+
+
+        

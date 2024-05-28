@@ -1,0 +1,49 @@
+class Solution:
+
+    def ReverseList(self, pHead: ListNode):
+        if pHead == None:
+            return None
+        cur = pHead
+        pre = None
+        while cur:
+            temp = cur.next
+            cur.next = pre
+            pre = cur
+            cur = temp
+        return pre
+
+    def addInList(self, head1: ListNode, head2: ListNode) -> ListNode:
+        if head1 == None:
+            return head2
+        if head2 == None:
+            return head1
+        head1 = self.ReverseList(head1)
+        head2 = self.ReverseList(head2)
+        res = ListNode(-1)
+        head = res
+        carry = 0
+
+        # 之前的版本超时了，可能相加后变成链表虽然是还是o(n)但是超过原本的o(n)?
+        # 反转的之前敲过了只不过觉得太麻烦了所以 
+        # 这个有个细节， 就是停止条件和取值 val1 val2 还有这个while的条件
+        # 这三行值得学习，之前就是卡在了不同截断后，那个进位如何处理
+        # 这里直到所有都遍历完才停止，包括了这个进位，这个学习
+        while head1 != None or head2 != None or carry != 0:
+            # 链表不为空则取其值
+            val1 = 0 if head1 == None else head1.val
+            val2 = 0 if head2 == None else head2.val
+            # 相加
+            temp = val1 + val2 + carry
+            # 获取进位
+            carry = (int)(temp / 10)
+            temp %= 10
+            # 添加元素
+            head.next = ListNode(temp)
+            head = head.next
+            # 移动下一个
+            if head1:
+                head1 = head1.next
+            if head2:
+                head2 = head2.next
+
+        return self.ReverseList(res.next)

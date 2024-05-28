@@ -1,0 +1,20 @@
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param nums int整型一维数组 
+# @return int整型
+#
+class Solution:
+    def minNumberInRotateArray(self , nums: List[int]) -> int:
+        # write code here
+
+        if len(nums) == 0:
+            return 0
+        i,j = 0,len(nums)-1
+        while i < j:
+            mid = (i+j) // 2
+            if nums[mid] > nums[j]:i = mid+1
+            elif nums[mid] < nums[j]:j = mid
+            else:j -= 1
+        return nums[i]

@@ -1,0 +1,62 @@
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param head1 ListNode类 
+# @param head2 ListNode类 
+# @return ListNode类
+#
+class Solution:
+    def addInList(self , head1: ListNode, head2: ListNode) -> ListNode:
+        # write code here
+        if head1 is None:
+            return head2
+        if head2 is None:
+            return head1
+
+        def reverse(pHead):
+            if pHead == None:
+                return None
+            cur = pHead
+            pre = None
+            while cur:
+                temp = cur.next
+                cur.next = pre
+                pre = cur
+                cur = temp
+
+            return pre
+
+        head1 = reverse(head1)
+        head2 = reverse(head2)
+        head = ListNode(0)
+        cur = head
+        carry = 0
+
+        while head1 or head2 or carry:
+            val1 = 0 if head1 == None else head1.val
+            val2 = 0 if head2 == None else head2.val
+
+            temp = val1 + val2 + carry
+
+            val = temp % 10
+            carry = temp // 10
+
+            cur.next = ListNode(val)
+            cur = cur.next
+            
+
+            if head1:
+                head1 = head1.next
+            if head2:
+                head2 = head2.next
+
+        return reverse(head.next)
+
+
+
+

@@ -1,0 +1,26 @@
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+#
+# 
+# @param head ListNode类 
+# @return bool布尔型
+#
+class Solution:
+    def hasCycle(self , head: ListNode) -> bool:
+        if not head:
+            return False
+        cur = head 
+        pre = head
+        while cur.next:
+            cur = cur.next
+            if not cur.next:
+                return False
+            cur = cur.next
+            pre = pre.next
+            if pre == cur:
+                return True
+            
+        return False

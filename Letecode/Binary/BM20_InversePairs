@@ -1,0 +1,58 @@
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param nums int整型一维数组 
+# @return int整型
+#
+class Solution:
+    def InversePairs(self , nums: List[int]) -> int:
+        # write code here
+
+        temp = [0] * len(nums)
+
+        def mergeSort(nums,left, right, temp):
+            if left >= right:
+                return 0
+            mid =  (left + right) // 2
+
+            left_inverse_pairs = mergeSort(nums, left, mid, temp)
+            right_inverse_pairs = mergeSort(nums, mid+1, right, temp)
+
+            if nums[mid] <= nums[mid+1]:
+                return left_inverse_pairs + right_inverse_pairs
+
+            cross_pairs = merge(nums,left,mid,right,temp)
+
+            return left_inverse_pairs + right_inverse_pairs + cross_pairs
+
+        def merge(a,left,mid,right,temp):
+            for i in range(left,right+1):
+                temp[i] = nums[i]
+
+            count = 0
+            i = left
+            j = mid+1
+ 
+            for k in range(left,right+1):
+                if i > mid:
+                    nums[k] = temp[j]
+                    j +=1
+                  
+                elif j > right:
+                    nums[k] = temp[i]
+                    i += 1
+               
+                elif temp[i] <= temp[j]:
+                    nums[k] = temp[i]
+                    i+=1
+                
+                else:
+                    nums[k] = temp[j]
+                    j+=1
+                    count += mid - i + 1
+           
+            return count 
+        return mergeSort(nums, 0 ,len(nums)-1,temp) % 1000000007
+
+

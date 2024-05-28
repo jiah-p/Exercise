@@ -1,0 +1,20 @@
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param head ListNode类 the head node
+# @return ListNode类
+#
+class Solution:
+    def sortInList(self , head: ListNode) -> ListNode:
+        # write code here
+      
+        # 思路一：是直接转数组这个简单
+        # 思路二：使用归并排序 这个有点类似之前的K个数组进行排序的问题 merge(mergesort1,mergesort2)
+        # 以后实现吧
+
+        

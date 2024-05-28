@@ -1,0 +1,42 @@
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+#
+# 
+# @param pHead1 ListNode类 
+# @param pHead2 ListNode类 
+# @return ListNode类
+#
+class Solution:
+    def FindFirstCommonNode(self , pHead1 , pHead2 ):
+        # write code here
+        if not pHead1 or not pHead2:
+            return None
+        def findlen(p):
+            k = 0
+            while p:
+                p = p.next
+                k += 1
+            return k
+        l1 = findlen(pHead1)
+        l2 = findlen(pHead2)
+        k = l1 - l2
+        if k > 0:
+            while k:
+                k-=1
+                pHead1 = pHead1.next
+        else:
+            k = abs(k)
+            while k:
+                k-=1
+                pHead2 = pHead2.next
+        while pHead1.val != pHead2.val:
+            if not pHead1.next:
+                return None
+            pHead1 = pHead1.next
+            pHead2 = pHead2.next
+        return pHead1
+
+
