@@ -28,6 +28,8 @@ class Solution:
         # 这个有个细节， 就是停止条件和取值 val1 val2 还有这个while的条件
         # 这三行值得学习，之前就是卡在了不同截断后，那个进位如何处理
         # 这里直到所有都遍历完才停止，包括了这个进位，这个学习
+
+        
         while head1 != None or head2 != None or carry != 0:
             # 链表不为空则取其值
             val1 = 0 if head1 == None else head1.val

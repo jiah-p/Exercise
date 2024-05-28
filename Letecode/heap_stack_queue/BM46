@@ -1,0 +1,39 @@
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param input int整型一维数组 
+# @param k int整型 
+# @return int整型一维数组
+#
+# class Treenode:
+    # def __init__(self,val) -> None:
+    #     self.val = val
+    #     self.left = None
+    #     self.right = None
+
+class Solution:
+    def GetLeastNumbers_Solution(self , input: List[int], k: int) -> List[int]:
+        # write code here
+        if k == 0:
+            return []
+        # root = TreeNode(input[0])
+        length = len(input)
+        input.insert(0,0)
+        ans = []
+        input.append(0)
+        for j in range(k):
+            for i  in range(length//2,0,-1):
+                if i*2+1 <= length:
+                    if input[i*2+1] < input[i]:
+                        input[i],input[i*2+1] = input[i*2+1],input[i]
+                if input[i*2] < input[i]:
+                    input[i],input[i*2]  = input[i*2],input[i]
+            ans.append(input.pop(1))
+            length -= 1
+
+        return ans
+
+
+
+

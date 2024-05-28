@@ -1,0 +1,18 @@
+from sys import setdlopenflags
+# -*- coding:utf-8 -*-
+class Solution:
+    s = []
+
+    def push(self, node):
+        # write code here
+        self.s.append(node)
+    def pop(self):
+        # write code here
+        self.s.pop()
+    def top(self):
+        # write code here
+        return self.s[-1]
+    def min(self):
+        # write code here
+        return min(self.s)
+s

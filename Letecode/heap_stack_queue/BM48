@@ -1,0 +1,17 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    ans  = []
+    def Insert(self, num):
+        # write code here
+        
+        self.ans.append(num)
+
+    def GetMedian(self):
+        # write code here
+        self.ans.sort()
+
+        if len(self.ans) % 2:
+            return self.ans[len(self.ans)//2]
+        else:
+            return (self.ans[len(self.ans)//2-1]+self.ans[len(self.ans)//2])/2.
+

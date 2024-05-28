@@ -1,0 +1,22 @@
+def solve(a):
+    pre = [[0] * (len(m) +1 )] * len(n)
+
+    # 需要构造每列的前缀和
+    for i in range(n):
+        for j in range(1,m+1):
+            pre[i][j] = pre[i][j-1] + a[i][j-1]
+
+    maxi = -1e9
+    for i in range(m):   # 列
+        for j in range(i+1,m+1):  # 列 
+            ans = 0  
+            for k in range(1,n):   # 行
+                ans = max(ans+a[k][j]-a[k][i], a[k][i]) #这个就是连续的 从每行定义过去 连续  也就是最大连续子数组，或者说最大连续子区间的定义
+                if (ans > maxi):maxi = ans
+
+
+def _2dimpresum(a):
+    pre = [[0] * (len(m) +1 )] * (len(n) +1)
+    for i in range(1,n+1):
+        for j in range(1,m+1):
+            pre[i][j] = pre[i-1][j]  + pre[i][j-1] - pre[i-1][j-1] + a[i-1][j-1]  # 构造二维前缀和

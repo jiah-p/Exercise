@@ -1,0 +1,27 @@
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param s string字符串 
+# @return bool布尔型
+#
+class Solution:
+    def isValid(self , s: str) -> bool:
+        # write code here
+        stack = [i for i in s]
+        braket_l = {'(','[','{'}
+        dic = {'(':')','[':']','{':'}'}
+        rec = []
+        while stack:
+            temp = stack.pop(0)
+            if temp in braket_l:
+                rec.append(temp)
+            else:
+                if not rec:
+                    return False
+                tail = rec.pop()
+                if temp != dic[tail]:
+                    return False
+        if rec:
+            return False
+        return True

@@ -7,4 +7,3 @@ def findmax(nums):
     return max(dp)
 
 res =findmax([1,2,-3,4,12,1,-20])
-print(res)
