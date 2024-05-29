@@ -1,0 +1,30 @@
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param str string字符串 
+# @return string字符串一维数组
+#
+class Solution:
+    res = []
+    def Permutation(self , str: str) -> List[str]:
+        # write code here
+        s = list(str)
+        viw = [False] * len(s)
+        s.sort()
+        def permute(s,ans,viw):
+            if len(ans) == len(s):
+                self.res.append(ans)
+            for i,val in enumerate(s):
+                # 后面表示当前字符不是第一个，并且前一个已经访问过了，并且当前值和前一个的值相等的情况
+                if viw[i] or (i>0 and not viw[i-1] and s[i] == s[i-1]):
+                    continue
+                viw[i] = True
+                ans += val
+                permute(s,ans,viw)
+                viw[i] = False
+                ans = ans[:-1]
+
+            return self.res
+
+        return permute(s,'',viw)

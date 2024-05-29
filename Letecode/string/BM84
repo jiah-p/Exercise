@@ -1,0 +1,23 @@
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param strs string字符串一维数组 
+# @return string字符串
+#
+class Solution:
+    def longestCommonPrefix(self , strs: List[str]) -> str:
+        # write code here
+        if not strs:return ''
+        if len(strs) == 1:
+            return strs[0]
+        lens = min([len(i) for i in strs])
+        count = 0
+        for i in range(lens):
+            ch = strs[0][i]
+            for j in strs:
+                if j[i] != ch:
+                    return strs[0][:count]
+            count += 1
+
+        return strs[0][:count]

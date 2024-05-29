@@ -6,9 +6,11 @@
 # @return int整型
 #
 class Solution:
-    def maxLength(self , arr) -> int:
+    def maxLength(self , arr: List[int]) -> int:
         # write code here
         # viw = set()
+        if not arr:
+            return 0
         temp = []
         res = []
         for i in arr:
@@ -22,6 +24,4 @@ class Solution:
             res.append(temp.copy())
         maxi = max([len(i) for i in res])
         return maxi
-s = Solution()
-res = s.maxLength([2,2,3,4,3])
-print(res)
+# 这道题目好像用例不能全部通过，但是思路我感觉是对的

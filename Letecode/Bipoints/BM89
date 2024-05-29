@@ -1,0 +1,28 @@
+# class Interval:
+#     def __init__(self, a=0, b=0):
+#         self.start = a
+#         self.end = b
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param intervals Interval类一维数组 
+# @return Interval类一维数组
+#
+class Solution:
+    def merge(self , intervals: List[Interval]) -> List[Interval]:
+        # write code here
+        ans = []
+        # def sort_key(s):
+        #     return s.start
+        intervals = sorted(intervals,key=lambda x:x.start)
+        for interval in intervals:
+            if not ans:
+                ans.append(interval)
+                continue
+            if ans[-1].end >= interval.start:
+                if interval.end >= ans[-1].end:
+                    ans[-1].end = interval.end
+            else:
+                ans.append(interval)
+        return ans

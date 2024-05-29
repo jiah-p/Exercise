@@ -1,0 +1,32 @@
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param num int整型一维数组 
+# @return int整型二维数组
+#
+class Solution:
+    def permute(self , num: List[int]) -> List[List[int]]:
+        # write code here
+        visited = {}
+        if len(num) <= 1:
+            return [num]
+        res = []
+        temp  = []
+
+        def dfs(num,temp):
+            if len(temp) == len(num):
+                res.append(temp.copy())
+            for i in num:
+                if i in visited and visited[i]:
+                    continue
+                visited[i] = True
+                temp.append(i)
+                dfs(num, temp)
+                visited[i] = False
+                temp.pop()
+        
+        dfs(num, temp)
+
+        return res
+

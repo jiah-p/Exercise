@@ -1,0 +1,86 @@
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 计算两个数之和
+# @param s string字符串 表示第一个整数
+# @param t string字符串 表示第二个整数
+# @return string字符串
+#
+
+
+# 这个题目跟链表那个题目有点像，统统转换成 三个值 a b 还有进位 carry 只要一个没空就进行加法，然后空的用0补充
+# 下面的解题是官方给的，有空用自己的思路坐下
+
+class Solution:
+    def solve(self , s: str, t: str) -> str:
+        # write code here
+        # if not t:
+        #     t = 0
+        # if not s:
+        #     s = 0
+        # return int(s) + int(t)
+        # s1 = 0
+        # for i in range(len(s)):
+        #     s1 *= 10
+        #     s1 += ord(s[i]) - 48
+        # t1 = 0
+        # for i in range(len(t)):
+        #     t1 *= 10
+        #     t1 += ord(t[i]) - 48
+
+        # return s1 + t1
+        # sl,tl = len(s),len(t)
+        # l = min(sl,tl)
+        # jinwei = 0
+        # ans = 0
+        # # 这里用列表会好点 可以转换又要花时间？
+        # for i in range(l):  
+        #     if jinwei:
+        #         ans += 1
+        #         if ans
+        #     ans *= 10
+        #     temp = ord(s[i]) + ord(t[i]) - 92
+        #     if temp > 9:
+        #         temp -= 10
+        #         jinwei = 1
+        #     ans += temp 
+        if s == "0" or s == "":
+            return t
+        if t == "0" or t == "":
+            return s
+  
+        if len(s) < len(t):
+            # 这个技巧可以学习
+            return self.solve(t, s)
+  
+        VALUE = 10 ** 9
+        ans = []
+        n1, n2 = len(s), len(t)
+        i, j = n1, n2
+        c = 0
+        while j:
+            d1 = min(i, 9)
+            d2 = min(j, 9)
+            sum = c + int(s[i - d1: i]) + int(t[j - d2: j])
+            ans.append(sum % VALUE)
+            c = sum // VALUE
+            i -= d1
+            j -= d2
+  
+        while i:
+            diff = min(9, i)
+            sum = c + int(s[i - diff: i])
+            ans.append(sum % VALUE)
+            c = sum // VALUE
+            i -= diff
+  
+        if c:
+            ans.append(c)
+  
+        ans.reverse()
+        ans[0] = str(ans[0])
+        for i in range(1, len(ans)):
+            ans[i] = str(ans[i]).rjust(9, "0")
+  
+        return "".join(ans)
+

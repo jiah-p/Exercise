@@ -1,0 +1,25 @@
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param mat int整型二维数组 
+# @param n int整型 
+# @return int整型二维数组
+#
+# 通过观察 便可以知道先转置，然后交换 实现如下
+class Solution:
+    def rotateMatrix(self , mat: List[List[int]], n: int) -> List[List[int]]:
+        # write code here
+
+        m = len(mat)
+        
+
+        for i in range(0,m-1):
+            for j in range(0,m-1-i):
+                mat[i][j], mat[m-1-j][m-1-i] = mat[m-1-j][m-1-i],mat[i][j]
+
+        for i in range(m//2):
+            mat[i], mat[m-1-i] = mat[m-1-i],mat[i]
+        
+        return mat
+

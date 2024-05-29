@@ -1,0 +1,18 @@
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 旋转数组
+# @param n int整型 数组长度
+# @param m int整型 右移距离
+# @param a int整型一维数组 给定数组
+# @return int整型一维数组
+#
+# 这个题目 应该是分三个区间 将数字进行交换
+class Solution:
+    def solve(self , n: int, m: int, a: List[int]) -> List[int]:
+        # write code here
+        if not a:
+            return []
+        m = m % n
+        a = a[n-m:] + a[:n-m]  
+        return a

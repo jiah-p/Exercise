@@ -1,0 +1,39 @@
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param num int整型一维数组 
+# @return int整型二维数组
+#
+class Solution:
+    res = []
+    def permuteUnique(self , num):
+        # write code here
+        #构造字典
+        # dt = {}
+        # for i in num:
+        #     if i not in dt.keys():
+        #         dt[i] = 1
+        #     else:
+        #         dt[i] += 1
+        # print(dt)
+        num.sort()
+        dt = [False]*len(num)
+        ans = []
+        def permute(num,dt,ans):
+            if len(ans) == len(num) and ans not in self.res:
+                self.res.append(ans.copy())
+                return
+            for ind,value in enumerate(num):
+                if dt[ind] or (ind>0 and num[ind] == num[ind-1] and not dt[ind-1]):
+                    continue
+                dt[ind] = True
+                ans.append(value)
+                permute(num,dt,ans)
+                dt[ind] = False
+                ans.pop()
+
+            return 
+            
+        permute(num,dt,ans)
+        return self.res
