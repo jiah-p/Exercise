@@ -1,0 +1,29 @@
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# longest common substring
+# @param str1 string字符串 the string
+# @param str2 string字符串 the string
+# @return string字符串
+#
+class Solution:
+    def LCS(self , str1: str, str2: str) -> str:
+        # write code here
+        len1 = len(str1)
+        len2 = len(str2)
+        # python列表初始化的时候注意这个问题
+        dp = [[0 for i in range(len2+1)] for i in range(len1+1)]
+        maxlen = 0
+        ind = 0
+        for i in range(1,len1+1):
+            for j in range(1,len2+1):
+                if str1[i-1] == str2[j-1]:
+                    dp[i][j] = dp[i-1][j-1] +1 
+                    if maxlen < dp[i][j]:
+                        maxlen = dp[i][j]
+                        ind = i
+        print(dp)
+        if maxlen == 0:
+            return ''
+        else:
+            return str1[ind-maxlen:ind]
