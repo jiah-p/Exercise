@@ -1,0 +1,58 @@
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param head ListNode类 
+# @return ListNode类
+#
+class Solution:
+    def maxPalindrome(self , head: ListNode) -> ListNode:
+        # write code here
+        if not head:return None
+        cur = head
+        ls = []
+        lens = 0
+        while cur:
+            ls.append(cur.val)
+            lens += 1
+            cur = cur.next
+        
+        def findmax(ls,mid1,mid2):
+            left = mid1
+            right = mid2
+            while left >= 0 and right < len(ls) and ls[left] == ls[right]:
+                left -= 1
+                right += 1
+            # if left        
+            return right - left - 1
+        m = 0
+        ind = -1
+        for i in range(len(ls)-1):
+            mx = max(findmax(ls,i,i),findmax(ls,i,i+1))
+            if  mx > m:
+                m = mx
+                ind = i
+        if m == lens:
+            return None
+        if m % 2:
+            step = m //2
+            print(m,ind,ls[ind-step:ind+step+1])
+            ls = ls[ind-step:ind+step+1]
+        else:
+            step = m //2 -1 
+            print(m,ind,ls[ind-step:ind+step+2])
+            ls = ls[ind-step:ind+step+2]
+        res = ListNode(None)
+        cur = res
+        for i in ls:
+            cur.next = ListNode(i)
+            cur = cur.next
+    
+        return res.next
+
+
+

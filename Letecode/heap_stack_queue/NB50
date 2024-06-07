@@ -1,0 +1,54 @@
+from ctypes import POINTER
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param tokens string字符串一维数组 
+# @return int整型
+#
+class Solution:
+    def calculatePostfix(self , tokens: List[str]) -> int:
+        # write code here
+        num = []
+        op = []
+        while tokens:
+            i = tokens.pop(0)
+            if i[0] == '-' and len(i) > 1:
+                num.append(int(i))
+                # print(int(i))
+                continue
+            if i.isdigit():
+                # print(int(i))
+                num.append(int(i))
+            else:
+                if i == '+' or i == '-':
+                    num2 = num.pop()
+                    num1 = num.pop()
+                    print(num1,num2)
+                    
+                    if i == '+':
+                        num.append(num1+num2)
+                    else:
+                        num.append(num1-num2)
+                    print(num)
+                else:
+                    num2 = num.pop()
+                    num1 = num.pop()
+                    print(num1,num2)
+                    if i == '*':
+                        num.append(num1*num2)
+                    else:
+                        num.append(int(num1/num2))
+                    print(num)
+        return num[-1]
+        # while op:
+        #     num1 = num.pop(0)
+        #     num2 = num.pop(0)
+        #     o = op.pop(0)
+        #     if o == '+':
+        #         num.append(num1+num2)
+        #     else:
+        #         num.append(num1-num2) 
+        # return num[0]
+
+

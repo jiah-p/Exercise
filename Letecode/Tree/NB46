@@ -1,0 +1,34 @@
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param root TreeNode类 
+# @return int整型
+#
+class Solution:
+    def diameterOfBinaryTree(self , root: TreeNode) -> int:
+        # write code here
+        if not root:return 0
+
+        def finddepth(root):
+            if not root:return 0 
+            return max(finddepth(root.left),finddepth(root.right)) + 1
+        l = []
+        r = []
+        def preOrder(root):
+            if not root:return
+
+            l.append(finddepth(root.left))
+            r.append(finddepth(root.right))
+            preOrder(root.left)
+            preOrder(root.right)
+
+        preOrder(root)
+        # print(l,r)
+        print([ i+j for i,j in zip(l,r)])
+        return max([ i+j for i,j in zip(l,r)])

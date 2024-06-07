@@ -1,0 +1,33 @@
+import re
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param str1 string字符串 
+# @param str2 string字符串 
+# @return int整型
+#
+class Solution:
+    def editDistance(self , str1: str, str2: str) -> int:
+        # write code here
+        if not str1: return len(str2)
+        if not str2: return len(str1)
+
+        row = len(str1) + 1 
+        col = len(str2) + 1
+        # dp 
+        def dp(row,col):
+            memo=[[0 for i in range(col)] for j in range(row)]
+            print(memo)
+            for i in range(row):memo[i][0] = i
+            for j in range(col):memo[0][j] = j
+
+            for i in range(1,row):
+                for j in range(1,col):
+                    if str1[i-1] == str2[j-1]:
+                        memo[i][j] = memo[i-1][j-1]
+                    else:
+                        memo[i][j] = min(memo[i-1][j-1],memo[i-1][j],memo[i][j-1]) + 1
+            return memo[-1][-1]
+
+        return dp(row,col)

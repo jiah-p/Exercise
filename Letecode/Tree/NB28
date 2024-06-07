@@ -1,0 +1,46 @@
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param cows int整型一维数组 
+# @return TreeNode类
+#
+class Solution:
+    def sortCowsTree(self , cows: List[int]) -> TreeNode:
+        # write code here
+        b = []
+        w = []
+        for i in cows:
+            if i:
+                w.append(i)
+            else:
+                b.append(i)
+        print(b,w)
+        def layerconstructor(ls):
+            if not ls :
+                return None
+            root = TreeNode(ls.pop(0))
+            q = [root]
+            while q:
+                temp = q.pop(0)
+                if ls:
+                    temp.left= TreeNode(ls.pop(0))
+                    q.append(temp.left)
+                if ls:
+                    temp.right = TreeNode(ls.pop(0))
+                    q.append(temp.right)
+
+            return root
+        b_t = layerconstructor(b)
+        w_t = layerconstructor(w)
+        root = TreeNode(-1)
+        root.left = b_t
+        root.right = w_t
+
+        return root
+

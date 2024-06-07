@@ -1,0 +1,32 @@
+from operator import pos
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param inOrder int整型一维数组 
+# @param postOrder int整型一维数组 
+# @return TreeNode类
+#
+class Solution:
+    def buildTree(self , inOrder: List[int], postOrder: List[int]) -> TreeNode:
+        # write code here
+
+        
+        if not inOrder or not postOrder:return 
+        root = TreeNode(postOrder[-1])
+        in_root = inOrder.index(root.val)
+
+        root.left = self.buildTree(inOrder[:in_root],postOrder[:in_root])
+        root.right = self.buildTree(inOrder[in_root+1:],postOrder[in_root:-1])
+        
+        return root
+        
+
+
+
+

@@ -1,0 +1,29 @@
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param s string字符串 
+# @param t string字符串 
+# @return string字符串
+#
+class Solution:
+    def minWindow(self , s: str, t: str) -> str:
+        # write code here
+        # 这道题目做的有问题，我的指针回溯了。右边指针应该不回溯的。以后再看看
+        left,right = 0,0
+        res = []
+        while right < len(s):
+            t1 = list(t)
+            while right < len(s) and t1:
+                if s[right] in t1:
+                    t1.remove(s[right])
+                right +=1
+            if not t1:res.append(s[left:right])
+            left += 1
+            right = left
+        if not res:return ''
+        return sorted(res,key=lambda x:len(x))[0]
+
+
+
+

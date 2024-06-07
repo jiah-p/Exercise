@@ -1,0 +1,31 @@
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param weights int整型一维数组 
+# @return int整型一维数组
+#
+class Solution:
+    def weightGrowth(self , weights: List[int]) -> List[int]:
+        # write code here
+        # mean = sum(weights) / len(weights)
+        # weights = [i - mean for i in weights]
+        # print(weights)
+        res = [-1]
+        lens = len(weights)
+        for i in range(lens-2,-1,-1):
+            count = -1
+            flag = False
+            for j in range(i+1,lens):
+                count +=1
+                if weights[j] > weights[i]:
+                    flag = True
+                    res.append(count+1)
+                    break
+            if not flag:
+                res.append(-1)
+        res.reverse()
+        return res
+
+
+

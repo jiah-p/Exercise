@@ -1,0 +1,29 @@
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param root TreeNode类 
+# @return int整型
+#
+def findmax(cur, max):
+    if cur is None:
+        return 
+    if cur.val > max[0]:
+        max[0] = cur.val
+    findmax(cur.left, max)
+    findmax(cur.right, max)
+
+class Solution:
+    def findMaxHeight(self , root: TreeNode) -> int:
+        # write code here
+        cur = root
+        max = []
+        max.append(root.val)
+        findmax(root,max)
+
+        return max[0]

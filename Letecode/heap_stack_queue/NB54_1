@@ -1,0 +1,23 @@
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param prices int整型一维数组 
+# @return double浮点型一维数组
+#
+class Solution:
+    def findMedianPrice(self , prices: List[int]) -> List[float]:
+        # write code here
+
+        res = []
+        lens = len(prices)
+    
+        for i in range(lens):
+            mid = (i + 0) //2
+            temp = sorted(prices[:i+1])
+            if i % 2 == 0:
+                res.append(temp[mid])
+            else:
+                res.append((temp[mid]+temp[mid+1])/2.)
+        return res
+            

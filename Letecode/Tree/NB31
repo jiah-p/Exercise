@@ -1,0 +1,40 @@
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param root TreeNode类 
+# @param targetSum int整型 
+# @return bool布尔型
+#
+class Solution:
+    def hasPathSumII(self , root: TreeNode, targetSum: int) -> bool:
+        # write code here
+        flag = [False]
+        def preOrder(root,flag): 
+            if not root:
+                return 
+            if flag[0]: return 
+            findtarget(root,0,flag)
+            preOrder(root.left,flag)
+            preOrder(root.right,flag)
+
+        def findtarget(root,sum,flag):
+            if not root:return
+            if flag[0]:return
+            sum+=root.val
+            if sum>targetSum:return
+            if sum == targetSum: 
+                flag[0] = True 
+                return
+            findtarget(root.left,sum,flag)
+            findtarget(root.right,sum,flag)
+
+        preOrder(root,flag)
+        if flag[0]:return True
+        else: return False
+        

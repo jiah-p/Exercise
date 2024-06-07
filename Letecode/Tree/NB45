@@ -1,0 +1,46 @@
+
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param root TreeNode类 
+# @param p int整型 
+# @param q int整型 
+# @return int整型
+#
+class Solution:
+    def lowestCommonAncestor(self , root: TreeNode, p: int, q: int) -> int:
+        # write code here
+        # if not root or not q or not p:return None
+
+        p_ls = []
+        q_ls = []
+        flag = [False]
+        def preOrder(root,flag,rec,pq):
+            if not root:return 
+            if flag[0]:return 
+            if root.val == pq: 
+                flag[0]  = True
+                rec.append(root.val)
+                return 
+            
+            rec.append(root.val)
+            preOrder(root.left,flag,rec,pq)
+            preOrder(root.right,flag,rec,pq)
+            if flag[0]:return 
+            rec.pop()
+
+        preOrder(root,flag,q_ls,q)
+        flag[0] = False
+        preOrder(root,flag,p_ls,p)
+
+        # print(q_ls,p_ls)
+        lens = min(len(q_ls),len(p_ls))
+        for i in range(lens-1,-1,-1):
+            if q_ls[i] == p_ls[i]:return q_ls[i]
+

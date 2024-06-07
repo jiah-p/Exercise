@@ -1,0 +1,41 @@
+# class TreeNode:
+
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+#
+# @param root TreeNode类
+# @return int整型
+#
+class Solution:
+    def maxMilkSum(self, root: TreeNode) -> int:
+        # write code here
+        res = []
+        if not root:
+            return res
+        left,right,r = [],[],[]
+        def findlr(root, temp):
+            if not root:
+                return 0
+            temp+= root.val
+            if not root.left and not root.right:
+                return temp
+            return max(findlr(root.left, temp),findlr(root.right, temp))
+        def preOrder(root):
+            if not root:
+                return 
+            r.append(root.val)
+            left.append(findlr(root.left,0))
+            right.append(findlr(root.right,0))
+            preOrder(root.left)
+            preOrder(root.right)
+
+        preOrder(root)
+    
+        print(r,left,right)
+        return max([left[i]+ right[i] + r[i] for i in range(len(r))])
+    

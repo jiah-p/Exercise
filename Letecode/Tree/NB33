@@ -1,0 +1,36 @@
+# class TreeNode:
+
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param root TreeNode类 
+# @return double浮点型一维数组
+#
+class Solution:
+    def averageOfLevels(self , root: TreeNode) -> List[float]:
+        # write code here
+        if not root:
+            return []
+        q = [root]
+        res = []
+        layer=[]
+        while q:
+            temp_ls = []
+            while q:
+                temp = q.pop(0)
+                temp_ls.append(temp.val)
+                layer.append(temp)
+            res.append(temp_ls)
+            while layer:
+                temp = layer.pop(0)
+                if temp.left:q.append(temp.left)
+                if temp.right:q.append(temp.right)
+        print(res)
+    
+        return [sum(i)/len(i) for i in res]
+

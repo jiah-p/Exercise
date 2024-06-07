@@ -1,0 +1,61 @@
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param head ListNode类 
+# @param k int整型 
+# @return ListNode类
+#
+class Solution:
+    def reverseKGroup(self , head: ListNode, k: int) -> ListNode:
+        # write code here
+        phead = ListNode(None)
+        phead.next = head
+
+        def reverse(head,tail):
+            pre = None
+            cur = head
+            while cur != tail and cur:
+                temp = cur.next
+                cur.next = pre
+                pre = cur
+                cur = temp
+            return pre
+
+        def getlen(head):
+            lens = 0
+            while head:
+                head = head.next
+                lens +=1
+            return lens
+
+        pre = phead
+        cur,tail = head,head
+        lens = getlen(cur)
+        if k == lens:
+            pre = reverse(cur,None)
+            return pre 
+        while 1:
+            count = k
+            while count and tail.next:
+                tail = tail.next
+                count -= 1
+            if count == 0:
+                pre.next = reverse(cur,tail)
+                pre = cur
+                cur = tail
+            else:
+                pre.next = cur
+                break
+            if not tail:
+                break
+        return phead.next
+        
+
+
+
+

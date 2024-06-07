@@ -1,0 +1,36 @@
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+#
+# @param root TreeNode类
+# @return int整型一维数组
+#
+class Solution:
+    def leftSideView(self, root: TreeNode) -> List[int]:
+        # write code here
+        if not root:
+            return []
+        q = [root]
+        res = []
+        layer = []
+        while q:
+            temp_ls = []
+            while q:
+                temp = q.pop(0)
+                temp_ls.append(temp.val)
+                layer.append(temp)
+            res.append(temp_ls)
+            while layer:
+                temp = layer.pop(0)
+                if temp.left:
+                    q.append(temp.left)
+                if temp.right:
+                    q.append(temp.right)
+    
+
+        return [i[0] for i in res]

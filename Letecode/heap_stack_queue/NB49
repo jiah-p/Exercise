@@ -1,0 +1,28 @@
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param s string字符串 
+# @return bool布尔型
+#
+class Solution:
+    def is_valid_cow_communication(self , s: str) -> bool:
+        # write code here
+        stack = []
+        rec = set(['(','{','['])
+        for i in s:
+            if i in rec:
+                stack.append(i)
+            else:
+                try:
+                    if i == ')':
+                        if stack.pop() != '(':return False
+                    elif i == '}':
+                        if stack.pop() != '{':return False
+                    elif i == ']':
+                        if stack.pop() != '[':return False
+                except:
+                    return False
+        if stack:return False
+        return True
+

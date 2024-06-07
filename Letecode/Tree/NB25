@@ -1,0 +1,50 @@
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param root TreeNode类 
+# @param k int整型 
+# @return int整型
+#
+class Solution:
+    def kthLighest(self , root: TreeNode, k: int) -> int:
+        # write code here
+
+        res = []
+        def findk(root):
+            # if len(res) == k:
+            #     return 
+            if not root:
+                return 
+            findk(root.left)   
+            res.append(root.val)
+            findk(root.right)   
+       
+        def quicksort(res,left,right):
+            if left > right:return 
+            pivot = partition(res,left,right)
+            if pivot == k:return
+            quicksort(res,left,pivot)
+            quicksort(res,pivot+1,right)
+
+        def partition(res,left,right):
+            pivot_ind =right
+            temp = left-1
+            for i in range(left,right):
+                if res[i]  <= res[pivot_ind]:
+                    temp +=1
+                    res[temp], res[i] = res[i],res[temp]
+            temp+=1
+            res[temp], res[pivot_ind] = res[pivot_ind], res[temp]
+            return temp
+        findk(root)
+        print(res)
+        # ans = quicksort(res,0,len(res)-1)
+
+        return res[k-1]
+            

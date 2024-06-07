@@ -1,0 +1,34 @@
+from re import S
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param op string字符串一维数组 
+# @param vals int整型二维数组 
+# @return int整型一维数组
+#
+class Solution:
+    def max_weight_cow(self , op: List[str], vals: List[List[int]]) -> List[int]:
+        # write code here
+        stack = []
+        res = []
+        for o in op:
+            if o == "MaxCowStack":
+                vals.pop(0)
+                res.append(-1)
+            elif o == "push":
+                temp = vals.pop(0)
+                stack.append(temp[1])
+                res.append(-1)
+            elif o == "getMax":
+                vals.pop(0)
+                res.append(max(stack))
+            elif o == "pop":
+                res.append(-1)
+                vals.pop(0)
+                stack.pop()
+            else:
+                vals.pop(0)
+                res.append(stack[-1])
+        return res
+

@@ -1,0 +1,22 @@
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+#
+# @param A string字符串
+# @return int整型
+#
+class Solution:
+    
+    def getLongestPalindrome(self, A: str) -> int:
+        maxlen = 1
+        lens = len(A)
+        def findmaxlen(s,left,right):
+            while left >= 0 and right < lens and s[left] == s[right]:
+                left -= 1
+                right += 1
+            # 注意减1，上面的这个保证进去了一次 就是异常才会出来
+            return right - left - 1
+        
+        for i in range(lens-1):
+            maxlen = max(maxlen,findmaxlen(A,i,i),findmaxlen(A,i,i+1))
+        return maxlen

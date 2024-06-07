@@ -1,0 +1,27 @@
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+#
+# @param numCows int整型
+# @param feedOrders int整型二维数组
+# @return bool布尔型
+#
+class Solution:
+    def canFeedAllCows(self, numCows: int, feedOrders: List[List[int]]) -> bool:
+        # write code here
+        # 这个题目默认是一头牛只有一个前提
+        feed = [-1 for i in range(numCows)]   # 需要喂的牛
+
+        for i in feedOrders:
+            index = i.pop(0)
+            value = i.pop(0)
+            feed[index] = value
+
+            while value!=-1:
+                # 构成了环
+                if feed[value] == index:
+                    return False
+
+                value = feed[value]
+
+        return True

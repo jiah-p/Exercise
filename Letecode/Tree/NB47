@@ -1,0 +1,37 @@
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param root TreeNode类 
+# @param sum int整型 
+# @return int整型
+#
+class Solution:
+    def pathSum(self , root: TreeNode, sum: int) -> int:
+        # write code here
+        def preorder(root,s,temp):
+            if not root: return temp[0] 
+            s += root.val
+            if s == sum: 
+                temp[0] += 1
+                
+
+            preorder(root.left,s,temp)
+            preorder(root.right,s,temp)
+            s-= root.val
+            return temp[0]
+
+        ans = [0]
+        def preOrder(root,ans):
+            if not root:return
+            temp = [0]
+            ans[0] += preorder(root,0,temp)
+            preOrder(root.left,ans)
+            preOrder(root.right,ans)
+        preOrder(root,ans) 
+        return ans[0] 

@@ -1,0 +1,47 @@
+from functools import lru_cache
+from operator import le
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param lists ListNode类一维数组 
+# @return ListNode类
+#
+class Solution:
+    def mergeKLists(self , lists: List[ListNode]) -> ListNode:
+        # write code here
+        if not lists:
+            return None
+
+        def merge(lists,left,right):
+            if left > right:return None
+            # print(left,right)
+            if left == right:return lists[left]
+            mid = (right + left) // 2
+            return mergesort(merge(lists,left,mid), merge(lists,mid+1,right))
+
+        def mergesort(left,right):
+            head = ListNode(None)
+            temp = head
+            lcur = left
+            rcur = right
+            while lcur and rcur:
+                if lcur.val < rcur.val:
+                    temp.next = lcur
+                    lcur = lcur.next
+                else:
+                    temp.next = rcur
+                    rcur = rcur.next
+                temp = temp.next
+            if lcur:
+                temp.next = lcur
+            else:
+                temp.next = rcur
+            
+            return head.next
+
+        return merge(lists,0,len(lists)-1)   

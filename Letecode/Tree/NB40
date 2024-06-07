@@ -1,0 +1,31 @@
+
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param root TreeNode类 
+# @return TreeNode类
+#
+class Solution:
+    def flattenTree(self , root: TreeNode) -> TreeNode:
+        # write code here
+        if not root:return None
+        left = self.flattenTree(root.left)
+        right = self.flattenTree(root.right)
+
+        if left:
+            root.right = left
+            root.left = None
+            while left.right:
+                left = left.right
+            left.right = right
+        else:
+            root.right = right
+            root.left = None
+
+        return root

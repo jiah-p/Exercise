@@ -1,0 +1,24 @@
+#
+
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param areas int整型一维数组 
+# @return int整型
+#
+class Solution:
+    def maxArea(self , areas: List[int]) -> int:
+        # write code here
+        # 对双指针 没想起来 粗暴做法为什么会块呢 估计用例问题
+        # 不看min 和 max这是一个O(n)
+        # 应该可以优化的 
+        max_area = 0
+        left, right = 0, len(areas) - 1
+        while left <= right:
+            area = (right - left + 1) * min(areas[left: right + 1])
+            max_area = max(max_area, area)
+            if areas[left] < areas[right]:
+                left += 1
+            else:
+                right -= 1
+        return max_area

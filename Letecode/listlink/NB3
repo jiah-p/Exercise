@@ -1,0 +1,50 @@
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param head ListNode类 
+# @param n int整型 
+# @return ListNode类
+#
+class Solution:
+    def moveNthToEnd(self , head: ListNode, n: int) -> ListNode:
+        # write code here
+        if not head or n == 1:
+            return head
+        
+        # def reverse(head):
+        #     pre = None
+        #     cur = head
+        #     while cur:
+        #         temp = cur.next
+        #         cur.next = pre
+        #         pre = cur
+        #         cur = temp
+        #     return pre
+
+        fast, slow = head, head
+        while n:
+            if not fast.next:
+                break
+            fast = fast.next
+            n-=1
+        if n:
+            head = head.next
+            slow.next = None
+            fast.next = slow
+            return head
+        else:
+            while fast.next:
+                slow = slow.next
+                fast = fast.next
+        temp = slow.next
+        slow.next = temp.next
+        temp.next = None
+        fast.next = temp
+
+        return head
+        

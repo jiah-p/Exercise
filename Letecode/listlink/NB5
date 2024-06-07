@@ -1,0 +1,50 @@
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param head ListNode类 
+# @param left int整型 
+# @param right int整型 
+# @return ListNode类
+#
+class Solution:
+    def reverseBetween(self , head: ListNode, left: int, right: int) -> ListNode:
+        # write code here
+
+        def reverse(head,tail):
+            pre,cur = None,head
+            while cur != tail:
+                temp = cur.next
+                cur.next= pre 
+                pre = cur
+                cur = temp
+            return pre
+
+        if left == right or not head or not head.next:
+            return head
+        phead = ListNode(None)
+        phead.next = head
+        pre,cur = phead,phead
+        ppre = pre
+        while right:
+            cur = cur.next
+            right -= 1
+
+        while left:
+            pre = pre.next
+            left -= 1
+            if not left:
+                break
+            ppre = pre
+
+        tail = cur.next
+        ppre.next = reverse(pre,tail)
+        pre.next = tail
+
+        return phead.next
+
+

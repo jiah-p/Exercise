@@ -1,0 +1,39 @@
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param root TreeNode类 
+# @param targetSum int整型 
+# @return bool布尔型
+#
+class Solution:
+    def Targetsum(self, root,k,sum,flag):
+        # 无语 题目是等于
+        if sum == k:
+            flag[0] = True 
+            return 
+        if not root:
+            return 
+        
+        # print(sum + root.val)
+        self.Targetsum(root.left,k,sum+root.val,flag)
+        self.Targetsum(root.right,k,sum+root.val,flag)
+        return
+
+    def hasPathSum(self , root: TreeNode, targetSum: int) -> bool:
+        # write code here
+        
+        flag = [False]
+        sum = 0
+        if not root:
+            return bool(sum > targetSum)
+        self.Targetsum(root,targetSum,sum, flag)
+
+        return flag[0]
+
+

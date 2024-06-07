@@ -1,0 +1,38 @@
+from operator import le
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+# 
+# @param root1 TreeNode类 
+# @param root2 TreeNode类 
+# @return bool布尔型
+#
+class Solution:
+    def leafSimilar(self , root1: TreeNode, root2: TreeNode) -> bool:
+        # write code here
+        leaf1 = []
+        leaf2 = []
+        
+        def findleaf(root,temp,flag):
+            if not root:return 
+            if not root.left and not root.right:
+                temp.append(root.val)
+            if flag == 1:
+                findleaf(root.left,temp,flag)
+                findleaf(root.right,temp,flag)
+            else:
+                findleaf(root.right,temp,flag)
+                findleaf(root.left,temp,flag)
+
+        findleaf(root1,leaf1,1)
+        findleaf(root2,leaf2,0)
+
+        if leaf1 == leaf2:
+            return True
+        else:
+            return False
